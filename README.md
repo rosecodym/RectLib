@@ -26,7 +26,7 @@ RectLib provides two separate intersection operations. The simpler is a simple b
     var r1r2 = Rect.VolumesIntersect(r1, r2); // true
     var r1r3 = Rect.VolumesIntersect(r1, r3); // false, volumes are "open" so adjacencies don't count
 
-More powerfully, RectLib can calculate a shell intersection of two Rects. This intersection can operate in two modes: excluding the input corners (e.g. searching only for edge intersections) or including them. In both modes, the result set will include points at which edges cross, and segments common to two edges.
+More powerfully, RectLib can calculate a shell intersection of two Rects. This intersection can operate in two modes: excluding the input corners (i.e. searching only for edge intersections) or including them. In both modes, the result set will include points at which edges cross, and segments common to two edges.
 
     var r4 = Rect.FromBoundingBox(0, 0, 2, 5);
     var r5 = Rect.FromBoundingBox(1, 1, 2, 8);
