@@ -1,0 +1,1 @@
+Copyright © Cody Rose 2016. All rights reserved. This software may not be used in source or binary form for any purpose without prior agreement with Cody Rose.
