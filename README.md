@@ -64,7 +64,7 @@ The two sides don't need to be identical; one just needs to exist wholly on the 
     var r11 = Rect.AtPosition(4, 1, 2, 2);
     var r9r11 = Rect.HaveCommonSide(r9, r11); // true, r9's right side wholly covers r11's left side
 
-Partial intersections don't count. (Neither do corners.) If you need them, use Rect.ShellInterection, which detects and calculates them.
+Partial intersections don't count. (Neither do corners.) If you need them, use Rect.ShellIntersection, which detects and calculates them.
 
     var r12 = Rect.AtPosition(4, 2, 4, 4);
     var r9r12 = Rect.HaveCommonSide(r9, r12); // false; the sides overlap, but neither wholly covers the other
