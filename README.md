@@ -1,12 +1,12 @@
-#RectLib
+# RectLib
 A little library for simple operations on axis-aligned rectangles
 
-###Requirements and building
+### Requirements and building
 The library itself only depends on FSharp.Core. It targets F# 4.0 and .NET 4.5.2. (It's written in F# but the API intention was to play nicely with any .NET language.) The property test suite requires NUnit and FsCheck, although everything you need should be set up correctly as a NuGet dependency, so just mashing your build button once you've got the solution open should work ok. (Of course, if you want to actually run the tests, you'll need to bring your own NUnit 3 runner.)
 
 All of the example code in this document is found in the RectLib.CSharpExamples project. It doesn't "do" anything, but you can attach a debugger and follow along.
 
-###Rectangles, segments, and points
+### Rectangles, segments, and points
 The fundamental type in RectLib is the Rect, which represents an axis-aligned rectangle. Rects can be created several ways:
 
     var r1 = Rect.FromBoundingBox(left: 0, bottom: 0, right: 10, top: 7);
@@ -17,7 +17,7 @@ Rects, like all RectLib types, are immutable and use structural equality.
 
 Conceptually, Rects consist of two parts: the _shell_ and the _volume_. A Rect's shell is its sides and corners, and its volume is the area it defines. Volumes are **open**: the "boundary" of a volume does not count as a part of it. A Rect's volume only exists implicitly, but its shell can be directly inspected with the Rect.Corners and Rect.Sides properties. Rect.Corners is straightforward. Rect.Sides returns a sequence of OrientedInterval objects; each such object defines a line segment by defining whether it's vertical or horizontal, the line on which the segment lies, and the range on that line that the segment spans. It can be easily unpacked into absolute coordinates via the Start and End properties. Line segments are _always_ defined to start at the "lower" coordinate and end at the "upper" coordinate.
 
-###Rectangle intersection
+### Rectangle intersection
 RectLib provides two separate intersection operations. The simpler is a simple boolean predicate that determines whether two Rect volumes intersect at all:
 
     var r1 = Rect.FromBoundingBox(0, 0, 2, 2);
@@ -42,7 +42,7 @@ In the latter mode, the result set will additionally include corners of one Rect
     // intrSegments is same as above
     // intrPoints now additionally contains (2,0) and (2,5)
 
-###Volume containment
+### Volume containment
 RectLib can determine whether one Rect volume fully contains another Rect volume. (**A** contains **B** if **B** - **A** is empty. This means that two identical Rects contain each other.)
 
     var r6 = Rect.AtPosition(0, 0, 2, 2);
@@ -74,6 +74,6 @@ Note that this check is done without respect to volume intersections. If you wan
     var r13 = Rect.AtPosition(2, 1, 2, 2);
     var r9r13 = Rect.HaveCommonSide(r9, r13); // true, even though r13 is contained in r9
 
-###Caveats
+### Caveats
 
 While the asymptotic performance of all of RectLib's operations should be reasonable, it hasn't been optimized for large data sets in any way. There's also no epsilon or tolerance in any of the internal predicates, so calling code is responsible for dealing with numerical imprecision issues. However, the fact that Rects are axis-aligned means that RectLib is entirely a predicate library, so it won't introduce any new instability to your data.
